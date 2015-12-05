@@ -2,6 +2,7 @@
 namespace Hugorut\Filter\Factories;
 
 use Exception;
+use Hugorut\Filter\Exceptions\InstanceNotSupportedException;
 
 abstract class Factory
 {
@@ -30,24 +31,33 @@ abstract class Factory
 
 	/**
 	 * override the main resources array
-	 * @param array<array> $resources 
+	 * 
+	 * @param   array<array> $resources 
+	 * @return  self 
 	 */
 	public function setResources(array $resources)
 	{
 		$this->resources = $resources;
+
+		return $this;
 	}
 
 	/**
 	 * add a resource to the main array
-	 * @param array $resource associative array with string factory name
+	 * 
+	 * @param array $resource 
+	 * @return self
 	 */
 	public function addResource(array $resource)
 	{
-		$this->resources[] = $resource;
+		$this->resources = array_merge($this->resources, $resource);
+
+		return $this;
 	}
 
 	/**
 	 * get the resources
+	 * 
 	 * @return array<array>
 	 */
 	public function getResources()
@@ -57,6 +67,7 @@ abstract class Factory
 
 	/**
 	 * return an array of instances
+	 * 
 	 * @return array<object>
 	 */
 	public function getAllInstances()

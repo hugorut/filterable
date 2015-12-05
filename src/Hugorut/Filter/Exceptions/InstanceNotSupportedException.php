@@ -1,5 +1,5 @@
 <?php 
 
-namespace Filter\Exceptions;
+namespace Hugorut\Filter\Exceptions;
 
 class InstanceNotSupportedException extends \Exception {}
