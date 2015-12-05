@@ -1,11 +1,16 @@
 <?php  
-namespace Filter;
+namespace Hugorut\Filter;
 
 use Exception;
 
 abstract class Factory
 {
 	
+	/**
+	 * class resources
+	 * 
+	 * @var array
+	 */
 	protected $resources = [];
 
 	/**
@@ -16,7 +21,9 @@ abstract class Factory
 	public function getInstance($type)
 	{
 		$type = strtolower($type);
-		if(!isset($this->resources[$type])) throw new Exception("type '".$type."' not supported");
+		if(!isset($this->resources[$type])) {
+			throw new InstanceNotSupportedException("type '".$type."' not supported");
+		}
 
 		return new $this->resources[$type];
 	}	

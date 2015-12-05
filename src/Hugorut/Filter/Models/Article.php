@@ -1,6 +1,6 @@
 <?php
 
-namespace Filter\Models;
+namespace Hugorut\Filter\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -13,6 +13,7 @@ class ArticleFilterBuilder extends Builder
 
 	/**
 	 * create a base eloquent search
+	 * 
 	 * @return null
 	 */
 	public function buildBaseQuery()
@@ -22,6 +23,7 @@ class ArticleFilterBuilder extends Builder
 
 	/**
 	 * get the query
+	 * 
 	 * @return collection
 	 */
 	public function execute()

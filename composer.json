@@ -1,0 +1,19 @@
+{
+    "name": "hugorut/filter",
+    "description": "A laravel package for working with query filtering",
+    "authors": [
+        {
+            "name": "Hugo Rut",
+            "email": "hugorut@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+          "psr-0": {
+              "Hugorut\\Filter\\": "src/"
+          }
+      }
+}

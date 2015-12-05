@@ -6,13 +6,44 @@ namespace Filter\Filters;
 */
 abstract class Filterable
 {
+	/**
+	 * join for the filter
+	 * 
+	 * @var array
+	 */
 	protected $join;
+
+	/**
+	 * where not in clause for the filter
+	 * 
+	 * @var array
+	 */
 	protected $whereNotIn;
+
+	/**
+	 * where clause for the filter
+	 * 
+	 * @var array
+	 */
 	protected $where;
+
+	/**
+	 * table identifier
+	 * 
+	 * @var string
+	 */
 	protected $table;
 
 	/**
-	 * getter
+	 * associative array of models used
+	 * 
+	 * @var array
+	 */
+	protected $modelName;
+
+	/**
+	 * get join value
+	 * 
 	 * @return string
 	 */
 	public function getJoin()
@@ -21,17 +52,21 @@ abstract class Filterable
 	}	
 
 	/**
-	 * setter
-	 * @return null
+	 * set join value
+	 * 
+	 * @return self
 	 */
 	public function setJoin(array $join)
 	{
-		return $this->join = $join;
+		$this->join = $join;
+
+		return $this;
 	}
 
 	/**
-	 * getter
-	 * @return string
+	 * get where not in value
+	 * 
+	 * @return array
 	 */
 	public function getWhereNotIn()
 	{
@@ -39,18 +74,22 @@ abstract class Filterable
 	}
 
 	/**
-	 * setter
-	 * @return null
+	 * set where not in value
+	 * 
+	 * @return self
 	 */
 	public function setWhereNotIn(array $whereNotIn)
 	{
-		return $this->whereNotIn = $whereNotIn;
+		$this->whereNotIn = $whereNotIn;
+
+		return $this;
 	}
 
 
 	/**
-	 * getter
-	 * @return string
+	 * get where value
+	 * 
+	 * @return array
 	 */
 	public function getWhere()
 	{
@@ -59,25 +98,32 @@ abstract class Filterable
 
 	/**
 	 * setter
-	 * @return null 
+	 * @return self 
 	 */
 	public function setWhere(array $where)
 	{
-		return $this->where = $where;
+		$this->where = $where;
+
+		return $this;
 	}
 
 
 	/**
 	 * set table name
+	 * 
 	 * @param string $value 
+	 * @return  self 
 	 */
 	public function setTable($table)
 	{
 		$this->table = $table;
+
+		return $this;
 	}
 
 	/**
-	 * build sql
+	 * build the sql through setting properties
+	 * 
 	 * @param  array  $values of ids
 	 * @return null
 	 */

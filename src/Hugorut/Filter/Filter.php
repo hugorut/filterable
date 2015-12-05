@@ -5,15 +5,19 @@ use Filter\Factories\BuildersFactory;
 use Filter\Factories\FiltersFactory;
 
 use Exception;
-/**
-* Main Filter Factory 
-*/
+
 class Filter
 {
+	/**
+	 * the builder instance
+	 * 
+	 * @var Filter\Builders\Builder
+	 */
 	protected $builder;
 	
 	/**
 	 * set builder type
+	 * 
 	 * @param string $type
 	 * @return $this
 	 */
@@ -26,6 +30,7 @@ class Filter
 
 	/**
 	 * return the builder instance
+	 * 
 	 * @return Builder
 	 */
 	public function getBuilder()
@@ -35,6 +40,7 @@ class Filter
 
 	/**
 	 * create filters to pass into the filter builder
+	 * 
 	 * @param  array  $filters assoc array 
 	 * @return $this
 	 */
@@ -58,6 +64,7 @@ class Filter
 
 	/**
 	 * return the query
+	 * 
 	 * @param Illuminate\Database\Eloquent\Builder
 	  */
 	public function get()

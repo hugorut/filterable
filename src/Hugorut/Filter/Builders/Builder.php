@@ -1,20 +1,55 @@
 <?php  
-namespace Filter\Builders;
+namespace Hugorut\Filter\Builders;
 
-use Filter\Filters\Filterable;
-use Illuminate\Support\Facades\DB;
+use Hugorut\Filter\Filters\Filterable;
 
 abstract class Builder
 {
+	/**
+	 * filters
+	 * 
+	 * @var array
+	 */
 	protected $filters = [];
+
+	/**
+	 * the raw query
+	 * 
+	 * @var string
+	 */
 	protected $query;
+
+	/**
+	 * joins to the model
+	 * 
+	 * @var array
+	 */
 	protected $joins = [];
+
+	/**
+	 * where clasuses to the model
+	 * 
+	 * @var array
+	 */
 	protected $wheres = [];
+
+	/**
+	 * where not in clauses to the model
+	 * 
+	 * @var array
+	 */
 	protected $whereNotIns = [];
+
+	/**
+	 * table to filter
+	 * 
+	 * @var string
+	 */
 	protected $tableName;
 
 	/**
 	 * add a filter to the main filters array
+	 * 
 	 * @param Filterable $filter 
 	 * @return null
 	 */
@@ -25,6 +60,7 @@ abstract class Builder
 
 	/**
 	 * get the filters array
+	 *
 	 * @return array
 	 */
 	public function getFilters()
@@ -34,6 +70,7 @@ abstract class Builder
 
 	/**
 	 * return the query
+	 * 
 	 * @return mixed
 	 */
 	public function getQuery()
@@ -43,6 +80,7 @@ abstract class Builder
 
 	/**
 	 * execute the query
+	 * 
 	 * @return Collection 
 	 */
 	public function get()
@@ -52,6 +90,7 @@ abstract class Builder
 
 	/**
 	 * add the joins and wheres to the query
+	 * 
 	 * @return null
 	 */
 	public function buildClauses()
@@ -75,16 +114,20 @@ abstract class Builder
 
 	/**
 	 * add a where 
+	 * 
 	 * @param string $where 
 	 * @return null
 	 */
 	public function addWhere($where)
 	{
-		if(is_array($where) && !empty($where)) $this->wheres[] = $where;		
+		if(is_array($where) && !empty($where)) {
+			$this->wheres[] = $where;		
+		}
 	}
 
 	/**
 	 * return the wheres array
+	 * 
 	 * @return array
 	 */
 	public function getWheres()
@@ -94,15 +137,19 @@ abstract class Builder
 
 	/**
 	 * add a join
+	 * 
 	 * @param string $join 
 	 */
 	public function addJoin($join)
 	{
-		if(is_array($join) && !empty($join)) $this->joins[] = $join;	
+		if(is_array($join) && !empty($join)) {
+			$this->joins[] = $join;	
+		}
 	}
 
 	/**
 	 * return the joins
+	 * 
 	 * @return array
 	 */
 	public function getJoins()
@@ -116,11 +163,14 @@ abstract class Builder
 	 */
 	public function addWhereNotIn($whereNot)
 	{
-		if(is_array($whereNot) && !empty($whereNot)) $this->whereNotIns[] = $whereNot;	
+		if(is_array($whereNot) && !empty($whereNot)) {
+			$this->whereNotIns[] = $whereNot;	
+		}
 	}
 
 	/**
 	 * return the where not ins
+	 * 
 	 * @return array
 	 */
 	public function getWhereNotIns()
@@ -130,6 +180,7 @@ abstract class Builder
 
 	/**
 	 * getter
+	 * 
 	 * @return string
 	 */
 	public function getTableName()
@@ -155,7 +206,18 @@ abstract class Builder
 		$this->buildClauses();
 	}
 	
+	/**
+	 * build the base query
+	 * 
+	 * @return void
+	 */
 	abstract function buildBaseQuery();
+
+	/**
+	 * how should we execute the query
+	 * 
+	 * @return Model
+	 */
 	abstract function execute();
 }
  ?>

@@ -5,6 +5,7 @@ class SiteFilter extends Filterable
 {
 	/**
 	 * model name associative array
+	 * 
 	 * @var array
 	 */
 	protected $modelName = [
@@ -13,6 +14,7 @@ class SiteFilter extends Filterable
 
 	/**
 	 * build the sql from the ids array
+	 * 
 	 * @param  array  $ids
 	 * @return null
 	 */
