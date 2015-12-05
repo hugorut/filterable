@@ -35,8 +35,19 @@ abstract class Factory
 			throw new InstanceNotSupportedException("type '".$type."' not supported");
 		}
 
-		return new $this->resources[$type];
+		$this->instanciate($this->resources[$type]));
 	}	
+
+	/**
+	 * a hook that child factories can use
+	 * 
+	 * @param  string $instance
+	 * @return mixed
+	 */
+	public function instanciate($instance)
+	{
+		return new $instance;
+	}
 
 	/**
 	 * override the main resources array

@@ -48,6 +48,13 @@ abstract class Builder
 	protected $tableName;
 
 	/**
+	 * a model instance
+	 * 
+	 * @var Object
+	 */
+	protected $model;
+
+	/**
 	 * add a filter to the main filters array
 	 * 
 	 * @param Filterable $filter 
@@ -86,30 +93,6 @@ abstract class Builder
 	public function get()
 	{
 		return $this->query->get();
-	}
-
-	/**
-	 * add the joins and wheres to the query
-	 * 
-	 * @return null
-	 */
-	public function buildClauses()
-	{
-		foreach ($this->joins as $join) 
-		{
-			$this->query->leftJoin($join[0], $join[1], $join[2], $join[3]);
-		}
-
-		foreach ($this->whereNotIns as $key => $notIn) 
-		{
-			$this->query->whereNotIn($notIn[0], $notIn[1]);
-		}
-
-		foreach ($this->wheres as $key => $where) 
-		{
-			$this->query->where($where[0], $where[1], $where[2]);
-		}
-
 	}
 
 	/**
@@ -185,7 +168,7 @@ abstract class Builder
 	 */
 	public function getTableName()
 	{
-		return $this->tableName;
+		return $this->model->getTable();
 	}
 
 	/**
@@ -211,7 +194,14 @@ abstract class Builder
 	 * 
 	 * @return void
 	 */
-	abstract function buildBaseQuery();
+	abstract function buildBaseQuery();	
+
+	/**
+	 * build the clauses
+	 * 
+	 * @return void
+	 */
+	abstract function buildClauses();
 
 	/**
 	 * how should we execute the query
