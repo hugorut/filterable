@@ -1,18 +1,13 @@
 <?php  
 namespace Hugorut\Filter\Factories;
 
-/**
-* Builders Factory designated to new up instances of builders
-*/
 class BuildersFactory extends Factory
 {
     /**
-     * class lookup table
+     * get from config
      * 
-     * @var array
+     * @var string
      */
-	protected $resources = [
-		'article' => '\Hugorut\Filter\Builders\ArticleFilterBuilder'
-	];
+    protected $config = 'Builders';
 }
  ?>

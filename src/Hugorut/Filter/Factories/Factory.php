@@ -6,13 +6,22 @@ use Hugorut\Filter\Exceptions\InstanceNotSupportedException;
 
 abstract class Factory
 {
-	
 	/**
 	 * class resources
 	 * 
 	 * @var array
 	 */
 	protected $resources = [];
+
+	public function __construct($resources = null) 
+	{
+	    if (is_null($resources)) {
+	        $resources = include(__DIR__ . '/../config.php');
+	        $resources = $resources[$this->config];
+	    }
+
+	    $this->resources = $resources; 
+	}
 
 	/**
 	 * return a new resource

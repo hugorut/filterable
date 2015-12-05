@@ -1,9 +1,6 @@
 <?php  
-namespace Filter\Filters;
+namespace Hugorut\Filter\Filters;
 
-/**
-* Filterable main abstract class
-*/
 abstract class Filterable
 {
 	/**
@@ -33,13 +30,6 @@ abstract class Filterable
 	 * @var string
 	 */
 	protected $table;
-
-	/**
-	 * associative array of models used
-	 * 
-	 * @var array
-	 */
-	protected $modelName;
 
 	/**
 	 * get join value
@@ -122,12 +112,30 @@ abstract class Filterable
 	}
 
 	/**
+	 * build the sql but let the child classes set behavior
+	 *
+	 * @throws Hugorut\Filter\Exceptions\TableNameException
+	 * @param  array  $ids 
+	 * @return self
+	 */
+	public function buildSql(array $ids)
+	{
+		if(is_null($this->table)) {
+			throw new TableNameException("valid tablename needs to be set");
+		}
+
+		$this->setClauses($ids);
+
+		return $this;
+	}
+
+	/**
 	 * build the sql through setting properties
 	 * 
 	 * @param  array  $values of ids
 	 * @return null
 	 */
-	abstract function buildSql(array $values);
+	abstract function setClauses(array $values);
 }
 
  ?>

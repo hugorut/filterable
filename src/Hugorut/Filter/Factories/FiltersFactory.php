@@ -1,18 +1,14 @@
 <?php  
 namespace Hugorut\Filter\Factories;
 
-/**
-* Filters Factory designated to new up instances of filters
-*/
 class FiltersFactory extends Factory
 {
+
     /**
-     * class lookup table
+     * get from config
      * 
-     * @var array
+     * @var string
      */
-	protected $resources = [
-		'site' => '\Hugorut\Filter\Filters\SiteFilter',
-	];
+    protected $config = 'Filters';
 }
  ?>

@@ -27,33 +27,17 @@ class Filter
 	 */
 	private $filtersFactory;
 
+	/**
+	 * default filter string
+	 * 
+	 * @var string
+	 */
+	protected $default = 'default'; 
+
 	function __construct(Factory $buildersFactory, Factory $filtersFactory) 
 	{
 		$this->buildersFactory = $buildersFactory;
 		$this->filtersFactory = $filtersFactory;
-	}
-
-	/**
-	 * set builder type
-	 * 
-	 * @param string $type
-	 * @return $this
-	 */
-	public function setType($type)
-	{
-		$this->builder = $this->buildersFactory->getInstance($type);
-
-		return $this;
-	}
-
-	/**
-	 * return the builder instance
-	 * 
-	 * @return Builder
-	 */
-	public function getBuilder()
-	{
-		return $this->builder;
 	}
 
 	/**
@@ -65,7 +49,7 @@ class Filter
 	public function by(array $filters)
 	{
 		if(is_null($this->builder)) {
-			$this->setType('test');
+			$this->setType($this->default);
 		}
 		
 		foreach ($filters as $filterName => $filterIds) 
@@ -92,5 +76,50 @@ class Filter
 		return $this->builder->execute();
 	}
 
+	/**
+	 * set builder type
+	 * 
+	 * @param string $type
+	 * @return $this
+	 */
+	public function setType($type)
+	{
+		$this->builder = $this->buildersFactory->getInstance($type);
+
+		return $this;
+	}
+
+	/**
+	 * return the builder instance
+	 * 
+	 * @return Builder
+	 */
+	public function getBuilder()
+	{
+		return $this->builder;
+	}
+
+    /**
+     * Gets the default filter string.
+     *
+     * @return string
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * Sets the default filter string.
+     *
+     * @param string $default the default
+     *
+     * @return self
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
+
+        return $this;
+    }
 }
- ?>
