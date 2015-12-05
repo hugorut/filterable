@@ -2,6 +2,7 @@
 namespace Hugorut\Filter\Filters;
 
 use Hugorut\Filter\Exceptions\TableNameException;
+use Illuminate\Database\Eloquent\Model;
 
 class EloquentFilterable extends Filterable
 {

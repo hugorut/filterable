@@ -16,8 +16,7 @@ abstract class Factory
 	public function __construct($resources = null) 
 	{
 	    if (is_null($resources)) {
-	        $resources = include(__DIR__ . '/../config.php');
-	        $resources = $resources[$this->config];
+	        $resources = config('filter.'.$this->config);
 	    }
 
 	    $this->resources = $resources; 
@@ -31,11 +30,12 @@ abstract class Factory
 	public function getInstance($type)
 	{
 		$type = strtolower($type);
+
 		if(!isset($this->resources[$type])) {
 			throw new InstanceNotSupportedException("type '".$type."' not supported");
 		}
 
-		$this->instanciate($this->resources[$type]));
+		return $this->instantiate($this->resources[$type]);
 	}	
 
 	/**
@@ -44,7 +44,7 @@ abstract class Factory
 	 * @param  string $instance
 	 * @return mixed
 	 */
-	public function instanciate($instance)
+	public function instantiate($instance)
 	{
 		return new $instance;
 	}

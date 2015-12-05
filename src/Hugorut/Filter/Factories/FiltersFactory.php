@@ -1,6 +1,8 @@
 <?php  
 namespace Hugorut\Filter\Factories;
 
+use Hugorut\Filter\Filters\EloquentFilterable;
+
 class FiltersFactory extends Factory
 {
     /**

@@ -1,7 +1,8 @@
 <?php 
 
 namespace Hugorut\Filter\Builders;
-    
+use Illuminate\Database\Eloquent\Model;  
+
 class EloquentFilterBuilder extends Builder
 {
     /**

@@ -51,7 +51,7 @@ class Filter
 		if(is_null($this->builder)) {
 			$this->setType($this->default);
 		}
-		
+
 		foreach ($filters as $filterName => $filterIds) 
 		{
 			$filterable = $this->filtersFactory->getInstance($filterName);	
