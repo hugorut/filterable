@@ -1,9 +1,7 @@
 <?php  
-namespace Filter;
+namespace Hugorut\Filter;
 
-use Filter\Factories\BuildersFactory;
-use Filter\Factories\FiltersFactory;
-
+use Hugorut\Filter\Factories\Factory;
 use Exception;
 
 class Filter
@@ -11,10 +9,30 @@ class Filter
 	/**
 	 * the builder instance
 	 * 
-	 * @var Filter\Builders\Builder
+	 * @var Hugorut\Filter\Builders\Builder
 	 */
 	protected $builder;
-	
+
+	/**
+	 * the builders factory instance
+	 * 
+	 * @var Hugorut\Filter\Factory
+	 */
+	private $buildersFactory;
+
+	/**
+	 * the filters factory instance
+	 * 
+	 * @var Hugorut\Filter\Factory
+	 */
+	private $filtersFactory;
+
+	function __construct(Factory $buildersFactory, Factory $filtersFactory) 
+	{
+		$this->buildersFactory = $buildersFactory;
+		$this->filtersFactory = $filtersFactory;
+	}
+
 	/**
 	 * set builder type
 	 * 
@@ -23,7 +41,7 @@ class Filter
 	 */
 	public function setType($type)
 	{
-		$this->builder = (new BuildersFactory)->getInstance($type);
+		$this->builder = $this->buildersFactory->getInstance($type);
 
 		return $this;
 	}
@@ -46,13 +64,13 @@ class Filter
 	 */
 	public function by(array $filters)
 	{
-		if(is_null($this->builder))  $this->setType('test');
+		if(is_null($this->builder)) {
+			$this->setType('test');
+		}
 		
-		$filtersFactory = new FiltersFactory;
-
 		foreach ($filters as $filterName => $filterIds) 
 		{
-			$filterable = $filtersFactory->getInstance($filterName);	
+			$filterable = $this->filtersFactory->getInstance($filterName);	
 			$filterable->setTable($this->builder->getTableName());
 			$filterable->buildSql($filterIds);
 

@@ -1,5 +1,5 @@
 <?php  
-namespace Hugorut\Filter;
+namespace Hugorut\Filter\Factories;
 
 use Exception;
 

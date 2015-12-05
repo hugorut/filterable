@@ -1,12 +1,13 @@
 <?php 
-namespace Filter\Builders;
+namespace Hugorut\Filter\Builders;
 
-use Filter\Models\Article;
+use Hugorut\Filter\Models\Article;
 
 class ArticleFilterBuilder extends Builder
 {
 	/**
 	 * table name to filter
+	 * 
 	 * @var string
 	 */
 	protected $tableName = 'articles';

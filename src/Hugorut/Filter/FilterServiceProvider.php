@@ -2,9 +2,9 @@
 
 namespace Hugorut\Filter;
 
-use App\Services\Filter\Factories\BuildersFactory;
-use App\Services\Filter\Factories\FiltersFactory;
-use App\Services\Filter\Filter;
+use Hugorut\Filter\Factories\FiltersFactory;
+use Hugorut\Filter\Factories\BuildersFactory;
+use Hugorut\Filter\Filter;
 use Illuminate\Support\ServiceProvider;
 
 class FilterServiceProvider extends ServiceProvider
@@ -17,7 +17,7 @@ class FilterServiceProvider extends ServiceProvider
     public function boot()
     {
        $this->app->bind('filter', function() {
-            return new Filter;
+            return new Filter(new BuildersFactory, new FiltersFactory);
        });
     }
 
