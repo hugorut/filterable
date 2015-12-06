@@ -37,7 +37,7 @@ class FilterServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            base_path('vendor/Filter/src/Hugorut/Filter/config.php'), 'filter'
+            base_path('vendor/Filter/src/config.php'), 'filter'
         );
     }
 }
