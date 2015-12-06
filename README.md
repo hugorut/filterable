@@ -17,10 +17,8 @@ $filter->only([
 
 First, pull in the package through Composer.
 
-```js
-"require": {
-    "hugorut/filter": "1.0"
-}
+```shell
+composer require hugorut/filterable
 ```
 
 Include the service provider within `config/app.php`.
