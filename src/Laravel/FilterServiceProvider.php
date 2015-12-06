@@ -25,7 +25,7 @@ class FilterServiceProvider extends ServiceProvider
        });
 
         $this->publishes([
-            base_path('vendor/Filter/src/Hugorut/Filter/config.php') => config_path('filter.php')
+            base_path('vendor/hugorut/filterable/src/config.php') => config_path('filter.php')
         ]);
     }
 
@@ -37,7 +37,7 @@ class FilterServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            base_path('vendor/Filter/hugorut/filterable/src/config.php'), 'filter'
+            base_path('vendor/hugorut/filterable/src/config.php'), 'filter'
         );
     }
 }
