@@ -1,6 +1,6 @@
 <?php
 
-namespace Hugorut\Filter;
+namespace Hugorut\Filter\Laravel;
 
 use Hugorut\Filter\Factories\BuildersFactory;
 use Hugorut\Filter\Factories\FiltersFactory;
