@@ -1,6 +1,8 @@
 <?php  
 namespace Hugorut\Filter\Filters;
 
+use Hugorut\Filter\Exceptions\TableNameException;
+
 abstract class Filterable
 {
 	/**
@@ -106,9 +108,19 @@ abstract class Filterable
 	 */
 	public function setTable($table)
 	{
-		$this->table = $table;
+		$this->table = $table;	
 
 		return $this;
+	}
+
+	/**
+	 * Gets the table identifier.
+	 *
+	 * @return string
+	 */
+	public function getTable()
+	{
+	    return $this->table;
 	}
 
 	/**

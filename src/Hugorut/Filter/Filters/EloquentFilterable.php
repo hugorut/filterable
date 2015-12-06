@@ -26,8 +26,10 @@ class EloquentFilterable extends Filterable
 	 */
 	public function setClauses(array $ids)
 	{
-		$this->join = [$this->model->getTable(), $this->table.'.'.$this->model->getForeignKey(), '=', $this->model->getTable().'.id'];
-		$this->whereNotIn = [$this->model->getTable().'.id', $ids];
+		$tableName = $this->model->getTable();
+		
+		$this->setJoin([$tableName, $this->table.'.'.$this->model->getForeignKey(), '=', $tableName.'.id']);
+		$this->setWhereNotIn([$tableName.'.id', $ids]);
 	}
 }
  ?>
