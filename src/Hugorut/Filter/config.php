@@ -11,12 +11,12 @@ return [
 
     'Builders' => [
         // add your builder resources here, for example: 
-        //  'article' => '\Hugorut\Filter\Builders\ArticleFilterBuilder'
+        //  'site' => '\Some\Namespace\Here'
     ],
 
     'Filters' => [
         // add your filter resources here, for example: 
-        //  'site' => '\Hugorut\Filter\Filters\SiteFilter'
+        //  'article' => '\Some\Namespace\Here'
     ],
 
 ];
