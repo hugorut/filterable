@@ -6,7 +6,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->factory = Mockery::mock('Hugorut\Filter\Factories\Factory')->makePartial();
     }
-    
+
     public function tearDown()
     {
         Mockery::close();

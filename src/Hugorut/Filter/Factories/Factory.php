@@ -3,6 +3,7 @@ namespace Hugorut\Filter\Factories;
 
 use Exception;
 use Hugorut\Filter\Exceptions\InstanceNotSupportedException;
+use Hugorut\Filter\Helpers\Configable;
 
 abstract class Factory
 {
@@ -13,10 +14,10 @@ abstract class Factory
 	 */
 	protected $resources = [];
 
-	public function __construct($resources = null) 
+	public function __construct(Configable $config, $resources = null) 
 	{
 	    if (is_null($resources)) {
-	        $resources = config('filter.'.$this->config);
+	        $resources = $config->get('filter.'.$this->config);
 	    }
 
 	    $this->resources = $resources; 

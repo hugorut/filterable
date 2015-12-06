@@ -2,9 +2,10 @@
 
 namespace Hugorut\Filter;
 
-use Hugorut\Filter\Factories\FiltersFactory;
 use Hugorut\Filter\Factories\BuildersFactory;
+use Hugorut\Filter\Factories\FiltersFactory;
 use Hugorut\Filter\Filter;
+use Hugorut\Filter\Helpers\LaravelConfig;
 use Illuminate\Support\ServiceProvider;
 
 class FilterServiceProvider extends ServiceProvider
@@ -17,7 +18,10 @@ class FilterServiceProvider extends ServiceProvider
     public function boot()
     {
        $this->app->bind('filter', function() {
-            return new Filter(new BuildersFactory, new FiltersFactory);
+            return new Filter(
+                new BuildersFactory(new LaravelConfig), 
+                new FiltersFactory(new LaravelConfig)
+            );
        });
 
         $this->publishes([

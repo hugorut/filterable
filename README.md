@@ -1,2 +1,2 @@
 #Fiterable
-##A Filter sytem for laravel models
+__A Filter sytem for laravel models__
