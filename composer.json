@@ -1,5 +1,5 @@
 {
-    "name": "hugorut/filter",
+    "name": "hugorut/filterable",
     "description": "A laravel package for working with query filtering",
     "homepage": "https://github.com/hugorut/filterable",
     "keywords": ["laravel","eloquent","ORM"],
