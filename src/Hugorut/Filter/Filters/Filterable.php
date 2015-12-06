@@ -20,6 +20,13 @@ abstract class Filterable
 	protected $whereNotIn;
 
 	/**
+	 * whree in clause for the filter
+	 * 
+	 * @var array
+	 */
+	protected $whereIn;
+
+	/**
 	 * where clause for the filter
 	 * 
 	 * @var array
@@ -77,6 +84,30 @@ abstract class Filterable
 		return $this;
 	}
 
+	/**
+	 * Gets the whree in clause for the filter.
+	 *
+	 * @return array
+	 */
+	public function getWhereIn()
+	{
+	    return $this->whereIn;
+	}
+
+	/**
+	 * Sets the whree in clause for the filter.
+	 *
+	 * @param array $whereIn the where in
+	 *
+	 * @return self
+	 */
+	public function setWhereIn(array $whereIn)
+	{
+	    $this->whereIn = $whereIn;
+
+	    return $this;
+	}
+
 
 	/**
 	 * get where value
@@ -128,15 +159,16 @@ abstract class Filterable
 	 *
 	 * @throws Hugorut\Filter\Exceptions\TableNameException
 	 * @param  array  $ids 
+	 * @param  string $type
 	 * @return self
 	 */
-	public function buildSql(array $ids)
+	public function buildSql(array $ids, $type)
 	{
 		if(is_null($this->table)) {
 			throw new TableNameException("valid tablename needs to be set");
 		}
 
-		$this->setClauses($ids);
+		$this->{$type}($ids);
 
 		return $this;
 	}
@@ -147,7 +179,14 @@ abstract class Filterable
 	 * @param  array  $values of ids
 	 * @return null
 	 */
-	abstract function setClauses(array $values);
+	abstract function only(array $values);
+
+	/**
+	 * [only description]
+	 * @param  array  $values [description]
+	 * @return [type]         [description]
+	 */
+	abstract function without(array $values);
 }
 
  ?>

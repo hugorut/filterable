@@ -23,7 +23,10 @@ class FilterableTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->filterable->getWhere());
 
         $this->filterable->setWhereNotIn($expected);
-        $this->assertEquals($expected, $this->filterable->getWhereNotIn());        
+        $this->assertEquals($expected, $this->filterable->getWhereNotIn());            
+
+        $this->filterable->setWhereIn($expected);
+        $this->assertEquals($expected, $this->filterable->getWhereIn());        
 
         $this->filterable->setTable('test');
         $this->assertEquals('test', $this->filterable->getTable());
@@ -35,18 +38,30 @@ class FilterableTest extends PHPUnit_Framework_TestCase
      */
     public function test_throw_exception_with_no_table()
     {
-        $this->filterable->buildSql([1,2]);
+        $this->filterable->buildSql([1,2], 'only');
     }    
 
-    public function test_calls_child_class_for_set_clauses_logic()
+    public function test_calls_child_class_for_only_method_passthru()
     {
         $passThru = [1,2];
 
-        $this->filterable->shouldReceive('setClauses')
+        $this->filterable->shouldReceive('only')
                          ->once()
                          ->with($passThru);
 
         $this->filterable->setTable('test');
-        $this->filterable->buildSql($passThru);
+        $this->filterable->only($passThru);
+    }    
+
+    public function test_calls_child_class_for_without_method_passthru()
+    {
+        $passThru = [1,2];
+
+        $this->filterable->shouldReceive('without')
+                         ->once()
+                         ->with($passThru);
+
+        $this->filterable->setTable('test');
+        $this->filterable->without($passThru);
     }
 }

@@ -38,7 +38,14 @@ abstract class Builder
 	 * 
 	 * @var array
 	 */
-	protected $whereNotIns = [];
+	protected $whereNotIns = [];	
+
+	/**
+	 * where in clauses to the model
+	 * 
+	 * @var array
+	 */
+	protected $whereIns = [];
 
 	/**
 	 * table to filter
@@ -142,6 +149,7 @@ abstract class Builder
 
 	/**
 	 * add where not in
+	 * 
 	 * @param string $wherenot 
 	 */
 	public function addWhereNotIn($whereNot)
@@ -159,6 +167,28 @@ abstract class Builder
 	public function getWhereNotIns()
 	{
 		return $this->whereNotIns;
+	}	
+
+	/**
+	 * add where in
+	 * 
+	 * @param string $wherenot 
+	 */
+	public function addWhereIn($whereIn)
+	{
+		if(is_array($whereIn) && !empty($whereIn)) {
+			$this->whereIns[] = $whereIn;	
+		}
+	}
+
+	/**
+	 * return the where not ins
+	 * 
+	 * @return array
+	 */
+	public function getWhereIns()
+	{
+		return $this->whereIns;
 	}
 
 	/**
@@ -179,10 +209,10 @@ abstract class Builder
 	{
 		$this->buildBaseQuery();
 
-		foreach ($this->filters as $filter) 
-		{
+		foreach ($this->filters as $filter) {
 			$this->addWhere($filter->getWhere());
 			$this->addWhereNotIn($filter->getWhereNotIn());
+			$this->addWhereIn($filter->getWhereIn());
 			$this->addJoin($filter->getJoin());
 		}
 

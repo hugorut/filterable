@@ -49,6 +49,16 @@ class EloquentFilterBuilder extends Builder
                 throw new ClauseInvalidException("Where not in clause is invalid, parameter 2 should be type array");
             }
             $this->query->whereNotIn($notIn[0], $notIn[1]);
+        }        
+
+        foreach ($this->whereIns as $key => $in) {
+            if (count($in) < 2) {
+                throw new ClauseInvalidException("Where in clause is invalid please set 2 parameters");
+            }
+            if (!is_array($in[1])) {
+                throw new ClauseInvalidException("Where in clause is invalid, parameter 2 should be type array");
+            }
+            $this->query->whereIn($in[0], $in[1]);
         }
 
         foreach ($this->wheres as $key => $where) {

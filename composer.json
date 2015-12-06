@@ -1,13 +1,15 @@
 {
     "name": "hugorut/filter",
     "description": "A laravel package for working with query filtering",
+    "homepage": "https://github.com/hugorut/filterable",
     "authors": [
         {
             "name": "Hugo Rut",
-            "email": "hugorut@gmail.com"
+            "email": "hugorut@gmail.com",
+	    "homepage": "http://hugorut.com",
+            "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0"
     },

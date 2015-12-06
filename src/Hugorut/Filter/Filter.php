@@ -41,12 +41,26 @@ class Filter
 	}
 
 	/**
-	 * create filters to pass into the filter builder
+	 * set builder type
 	 * 
+	 * @param string $type
+	 * @return $this
+	 */
+	public function setType($type)
+	{
+		$this->builder = $this->buildersFactory->getInstance($type);
+
+		return $this;
+	}
+
+	/**
+	 * create filters to pass into the filter builder
+	 *
+	 * @param  string $method 
 	 * @param  array  $filters assoc array 
 	 * @return $this
 	 */
-	public function by(array $filters)
+	public function by(array $filters, $method)
 	{
 		if(is_null($this->builder)) {
 			$this->setType($this->default);
@@ -56,12 +70,34 @@ class Filter
 		{
 			$filterable = $this->filtersFactory->getInstance($filterName);	
 			$filterable->setTable($this->builder->getTableName());
-			$filterable->buildSql($filterIds);
+			$filterable->buildSql($filterIds, $method);
 
 			$this->builder->addFilter($filterable);	
 		}
 
 		return $this;
+	}
+
+	/**
+	 * with only these filters
+	 *
+	 * @param  array  $filters 
+	 * @return self
+	 */
+	public function only(array $filters)
+	{
+		return $this->by($filters, __function__);
+	}
+
+	/**
+	 * whithout the filters
+	 * 
+	 * @param  array  $filters 
+	 * @return self
+	 */
+	public function without(array $filters)
+	{
+		return $this->by($filters, __function__);
 	}
 
 	/**
@@ -74,19 +110,6 @@ class Filter
 		$this->builder->buildQuery();
 
 		return $this->builder->execute();
-	}
-
-	/**
-	 * set builder type
-	 * 
-	 * @param string $type
-	 * @return $this
-	 */
-	public function setType($type)
-	{
-		$this->builder = $this->buildersFactory->getInstance($type);
-
-		return $this;
 	}
 
 	/**

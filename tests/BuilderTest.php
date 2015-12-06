@@ -24,7 +24,11 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $this->builder->addWhereNotIn($query);
         $this->builder->addWhereNotIn($query2);
-        $this->assertEquals($expected, $this->builder->getWhereNotIns());        
+        $this->assertEquals($expected, $this->builder->getWhereNotIns());          
+
+        $this->builder->addWhereIn($query);
+        $this->builder->addWhereIn($query2);
+        $this->assertEquals($expected, $this->builder->getWhereIns());        
 
         $this->builder->addJoin($query);
         $this->builder->addJoin($query2);
@@ -35,6 +39,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
     {
         $expectedWhere = ['column', [1,2]];
         $expectedWhereNotIn = ['column', [3,4]];
+        $expectedWhereIn = ['column', [5,6]];
         $expectedJoin = ['table', 'table.tests_id', '=', 'test.id'];
 
         $mockFilterable = Mockery::mock('Hugorut\Filter\Filters\Filterable');
@@ -45,7 +50,10 @@ class BuilderTest extends PHPUnit_Framework_TestCase
                        ->andReturn($expectedWhere);        
         $mockFilterable->shouldReceive('getWhereNotIn')
                        ->once()
-                       ->andReturn($expectedWhereNotIn);        
+                       ->andReturn($expectedWhereNotIn);         
+        $mockFilterable->shouldReceive('getWhereIn')
+                       ->once()
+                       ->andReturn($expectedWhereIn);        
         $mockFilterable->shouldReceive('getJoin')
                        ->once()
                        ->andReturn($expectedJoin);
@@ -60,6 +68,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals([$expectedWhere], $this->builder->getWheres());
         $this->assertEquals([$expectedWhereNotIn], $this->builder->getWhereNotIns());
+        $this->assertEquals([$expectedWhereIn], $this->builder->getWhereIns());
         $this->assertEquals([$expectedJoin], $this->builder->getJoins());
     }
 }
