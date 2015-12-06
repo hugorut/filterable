@@ -8,7 +8,7 @@ $filter = Filter::setType('articles');
 
 #filter those articles by the Page and Author model so that only
 #articles that appear with these contraints are returned
-$filter->by([
+$filter->only([
     'pages' => [1, 2], 
     'authors' => [4, 7, 9]
 ])->get();
@@ -75,7 +75,7 @@ Add models you wish to filter by in the *Filters* array
 ],
 ```
 
-__Api__
+__API__
 
 It is highly recommended that you use the Filter facade or dependency injection to access the package functionality as this the class has a number of depencies which the laravel IOC container can rectify. 
 
@@ -85,11 +85,16 @@ Using the Filter class is simple, first set a model you wish to appy filters aga
 $filter = Filter::setType('articles');
 ```
 
-Then call the `by` method on the filter instance passing in an associative array of filters you would like to apply. This array needs to have keys as the class aliases as defined in the filter config file and values as an array model ids.
-
+Now the filter is configured to the correct model you can call either the `only` or the `without` methods on the filter. 
 ```php
-$filter = filter->by(['pages' => [1, 2] ]);
+$filter->only(['pages' => [1, 2]]);
+/*-----
+* or
+-----*/
+$filter->without(['pages' => [1, 2]]);
 ```
+The parameters of both of these methods are an assoicative array. The keys of this associative array are the model aliases (as defined in your `app\config\filter.php` config file) and the values are an array of the ids of these models.
+
 
 Call the `get` method on the filter to then query the database and return the filtered results.
 
