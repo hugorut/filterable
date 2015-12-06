@@ -2,11 +2,12 @@
     "name": "hugorut/filter",
     "description": "A laravel package for working with query filtering",
     "homepage": "https://github.com/hugorut/filterable",
+    "keywords": ["laravel","eloquent","ORM"],
     "authors": [
         {
             "name": "Hugo Rut",
             "email": "hugorut@gmail.com",
-	    "homepage": "http://hugorut.com",
+	        "homepage": "http://hugorut.com",
             "role": "Developer"
         }
     ],
@@ -17,7 +18,7 @@
         "classmap": [
             "tests"
         ],
-        "psr-0": {
+        "psr-4": {
             "Hugorut\\Filter\\": "src/"
         }
     },
