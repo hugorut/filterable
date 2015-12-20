@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/hugorut/filterable.png)](https://travis-ci.org/hugorut/filterable)
 #Fiterable
 __A package which provides a fluent interface to apply constraints to an Eloquent query__
 
